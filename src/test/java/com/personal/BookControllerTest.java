@@ -17,10 +17,12 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.personal.config.SpringConfigTest;
 import com.personal.controller.BookController;
@@ -33,6 +35,7 @@ import junit.framework.Assert;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringConfigTest.class)
 @ActiveProfiles("test")
+@WebAppConfiguration
 public class BookControllerTest {
 
 	@Mock
@@ -44,12 +47,16 @@ public class BookControllerTest {
 	@InjectMocks
 	private BookController bookController;
 
+	@Autowired
+	private WebApplicationContext webApplicationContext;
+
 	private HttpMessageConverter mappingJackson2HttpMessageConverter;
 
 	private MockMvc mvc;
 
 	@Autowired
 	void setConverters(HttpMessageConverter<?>[] converters) {
+		System.out.println(converters);
 		List<HttpMessageConverter<?>> httpMessageConverterslist = Arrays.asList(converters);
 		for (HttpMessageConverter<?> httpMessageConverter : httpMessageConverterslist) {
 			if (httpMessageConverter instanceof MappingJackson2HttpMessageConverter) {
@@ -62,7 +69,7 @@ public class BookControllerTest {
 	@org.junit.Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		this.mvc = MockMvcBuilders.standaloneSetup(BookController.class).build();
+		this.mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
