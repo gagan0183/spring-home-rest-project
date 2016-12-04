@@ -6,8 +6,11 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,18 +24,20 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "book_table")
+@Table(name = "tutorial_table")
 @EntityListeners(AuditingEntityListener.class)
 @Audited
-@AuditTable(value = "book_audit_table")
-public class Book {
+@AuditTable(value = "tutorial_audit_table")
+public class Tutorial {
 	@Id
-	@Column(length = 20, nullable = false, unique = true)
-	private String isbn;
-	@Column(name = "book_name", length = 100, nullable = false)
-	private String bookName;
-	@Column(name = "type", length = 90, nullable = false)
-	private String type;
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "tutorial_generator")
+	@TableGenerator(name = "tutorial_generator", pkColumnName = "generator_column", pkColumnValue = "tutorial_value", allocationSize = 1, initialValue = 1, valueColumnName = "generator_value", table = "homeproject_generator_table")
+	@Column(name = "tutorial_id", insertable = false, nullable = false, unique = true)
+	private int tutorialId;
+	@Column(name = "tutorial_name", nullable = false)
+	private String tutorialName;
+	@Column(name = "tutorial_type", nullable = false)
+	private String tutorialType;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@Column(name = "start_date", nullable = false)
@@ -53,22 +58,6 @@ public class Book {
 	private Date createdOn;
 	@LastModifiedDate
 	private Date lastModifiedOn;
-
-	public String getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
-
-	public String getBookName() {
-		return bookName;
-	}
-
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
-	}
 
 	public Date getStartDate() {
 		return startDate;
@@ -92,14 +81,6 @@ public class Book {
 
 	public void setRevision(boolean revision) {
 		this.revision = revision;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getCreatedBy() {
@@ -132,5 +113,29 @@ public class Book {
 
 	public void setLastModifiedOn(Date lastModifiedOn) {
 		this.lastModifiedOn = lastModifiedOn;
+	}
+
+	public int getTutorialId() {
+		return tutorialId;
+	}
+
+	public void setTutorialId(int tutorialId) {
+		this.tutorialId = tutorialId;
+	}
+
+	public String getTutorialName() {
+		return tutorialName;
+	}
+
+	public void setTutorialName(String tutorialName) {
+		this.tutorialName = tutorialName;
+	}
+
+	public String getTutorialType() {
+		return tutorialType;
+	}
+
+	public void setTutorialType(String tutorialType) {
+		this.tutorialType = tutorialType;
 	}
 }

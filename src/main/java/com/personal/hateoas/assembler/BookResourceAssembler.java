@@ -1,5 +1,7 @@
 package com.personal.hateoas.assembler;
 
+import java.util.List;
+
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -24,5 +26,11 @@ public class BookResourceAssembler extends ResourceAssemblerSupport<Book, BookRe
 	protected BookResource instantiateResource(Book book) {
 		return new BookResource(book.getIsbn(), book.getBookName(), book.getType(), book.getStartDate(),
 				book.getCompleteDate(), book.isRevision());
+	}
+
+	@Override
+	public List<BookResource> toResources(Iterable<? extends Book> entities) {
+		// TODO Auto-generated method stub
+		return super.toResources(entities);
 	}
 }
