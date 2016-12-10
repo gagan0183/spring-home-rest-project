@@ -6,15 +6,16 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -23,31 +24,28 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "book_table")
+@Table(name = "video_table")
 @EntityListeners(AuditingEntityListener.class)
 @Audited
-@AuditTable(value = "book_audit_table")
-public class Book {
+@AuditTable(value = "video_audit_table")
+public class Video {
 	@Id
-	@NotEmpty
-	@Column(length = 20, nullable = false, unique = true)
-	private String isbn;
-	@NotEmpty
-	@Column(name = "book_name", length = 100, nullable = false)
-	private String bookName;
-	@NotEmpty
-	@Column(name = "type", length = 90, nullable = false)
-	private String type;
-	@NotNull
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "video_generator")
+	@TableGenerator(name = "video_generator", pkColumnName = "generator_column", pkColumnValue = "video_value", allocationSize = 1, initialValue = 1, valueColumnName = "generator_value", table = "homeproject_generator_table")
+	@Column(name = "tutorial_id", insertable = false, nullable = false, unique = true)
+	private int videoId;
+	@Column(name = "video_name", nullable = false)
+	private String videoName;
+	@Column(name = "source", nullable = false)
+	private String source;
+	@Column(name = "genre", nullable = false)
+	private String genre;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
-	@Column(name = "start_date", nullable = false)
-	private Date startDate;
-	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
-	@Column(name = "complete_date", nullable = false)
-	private Date completeDate;
+	@Column(name = "date", nullable = false)
+	private Date date;
+	@Column(name = "link")
+	private String link;
 	@Basic(optional = true)
 	@Column(name = "revision", nullable = true)
 	private boolean revision;
@@ -61,36 +59,36 @@ public class Book {
 	@LastModifiedDate
 	private Date lastModifiedOn;
 
-	public String getIsbn() {
-		return isbn;
+	public int getVideoId() {
+		return videoId;
 	}
 
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
+	public void setVideoId(int videoId) {
+		this.videoId = videoId;
 	}
 
-	public String getBookName() {
-		return bookName;
+	public String getVideoName() {
+		return videoName;
 	}
 
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
+	public void setVideoName(String videoName) {
+		this.videoName = videoName;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	public String getSource() {
+		return source;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setSource(String source) {
+		this.source = source;
 	}
 
-	public Date getCompleteDate() {
-		return completeDate;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setCompleteDate(Date completeDate) {
-		this.completeDate = completeDate;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public boolean isRevision() {
@@ -99,14 +97,6 @@ public class Book {
 
 	public void setRevision(boolean revision) {
 		this.revision = revision;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getCreatedBy() {
@@ -139,5 +129,21 @@ public class Book {
 
 	public void setLastModifiedOn(Date lastModifiedOn) {
 		this.lastModifiedOn = lastModifiedOn;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 }

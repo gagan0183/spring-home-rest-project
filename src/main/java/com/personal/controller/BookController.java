@@ -2,6 +2,8 @@ package com.personal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ public class BookController {
 	private MessageSource messageSource;
 
 	@RequestMapping(value = "/book", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SuccessMessage> addBook(@RequestBody Book book) {
+	public ResponseEntity<SuccessMessage> addBook(@Valid @RequestBody Book book) {
 		LOGGER.info("in addBook");
 
 		Book returnBook = bookService.addBook(book);
