@@ -18,14 +18,14 @@ public class BookResourceAssembler extends ResourceAssemblerSupport<Book, BookRe
 
 	@Override
 	public BookResource toResource(Book book) {
-		BookResource bookResource = createResourceWithId(book.getIsbn(), book);
+		BookResource bookResource = createResourceWithId("/book/" + book.getIsbn(), book);
 		return bookResource;
 	}
 
 	@Override
 	protected BookResource instantiateResource(Book book) {
-		return new BookResource(book.getIsbn(), book.getBookName(), book.getType(), book.getStartDate(),
-				book.getCompleteDate(), book.isRevision());
+		return new BookResource(book.getIsbn(), book.getBookName(), book.getType(), book.getAuthor(),
+				book.getStartDate(), book.getCompleteDate(), book.isRevision());
 	}
 
 	@Override

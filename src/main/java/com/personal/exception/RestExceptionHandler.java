@@ -44,6 +44,30 @@ public class RestExceptionHandler {
 		return new ResponseEntity<>(errordetail, null, HttpStatus.BAD_REQUEST);
 	}
 
+	@ExceptionHandler(PostCertificationException.class)
+	public ResponseEntity<?> handlePostCertificationException(PostCertificationException postCertficationException,
+			HttpServletRequest request) {
+		Errordetail errordetail = new Errordetail();
+		errordetail.setTimeStamp(new Date().getTime());
+		errordetail.setStatus(HttpStatus.BAD_REQUEST.value());
+		errordetail.setTitle("unable to post certification");
+		errordetail.setDetail(postCertficationException.getMessage());
+		errordetail.setDeveloperMessage(postCertficationException.getClass().getName());
+		return new ResponseEntity<>(errordetail, null, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(PostProjectException.class)
+	public ResponseEntity<?> handlePostProjectException(PostProjectException postProjectException,
+			HttpServletRequest request) {
+		Errordetail errordetail = new Errordetail();
+		errordetail.setTimeStamp(new Date().getTime());
+		errordetail.setStatus(HttpStatus.BAD_REQUEST.value());
+		errordetail.setTitle("unable to post certification");
+		errordetail.setDetail(postProjectException.getMessage());
+		errordetail.setDeveloperMessage(postProjectException.getClass().getName());
+		return new ResponseEntity<>(errordetail, null, HttpStatus.BAD_REQUEST);
+	}
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<?> handleValidationError(MethodArgumentNotValidException methodArgumentNotValidException,
 			HttpServletRequest request) {

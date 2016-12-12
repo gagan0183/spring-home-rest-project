@@ -38,6 +38,8 @@ public class Book {
 	@NotEmpty
 	@Column(name = "type", length = 90, nullable = false)
 	private String type;
+	@Column(name = "author", nullable = false)
+	private String author;
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
@@ -139,5 +141,13 @@ public class Book {
 
 	public void setLastModifiedOn(Date lastModifiedOn) {
 		this.lastModifiedOn = lastModifiedOn;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 }

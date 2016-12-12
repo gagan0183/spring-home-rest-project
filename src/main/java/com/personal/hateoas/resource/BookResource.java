@@ -8,6 +8,7 @@ public class BookResource extends ResourceSupport {
 	private String isbn;
 	private String bookName;
 	private String type;
+	private String author;
 	private Date startDate;
 	private Date completeDate;
 	private boolean revision;
@@ -16,12 +17,13 @@ public class BookResource extends ResourceSupport {
 
 	}
 
-	public BookResource(String isbn, String bookName, String type, Date startDate, Date completeDate,
+	public BookResource(String isbn, String bookName, String type, String author, Date startDate, Date completeDate,
 			boolean revision) {
 		super();
 		this.isbn = isbn;
 		this.bookName = bookName;
 		this.type = type;
+		this.author = author;
 		this.startDate = startDate;
 		this.completeDate = completeDate;
 		this.revision = revision;
@@ -49,5 +51,9 @@ public class BookResource extends ResourceSupport {
 
 	public String getType() {
 		return type;
+	}
+
+	public String getAuthor() {
+		return author;
 	}
 }
