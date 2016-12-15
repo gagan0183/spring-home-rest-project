@@ -68,6 +68,18 @@ public class RestExceptionHandler {
 		return new ResponseEntity<>(errordetail, null, HttpStatus.BAD_REQUEST);
 	}
 
+	@ExceptionHandler(PostVideotutorialException.class)
+	public ResponseEntity<?> handlePostVideotutorialException(PostVideotutorialException postVideotutorialException,
+			HttpServletRequest request) {
+		Errordetail errordetail = new Errordetail();
+		errordetail.setTimeStamp(new Date().getTime());
+		errordetail.setStatus(HttpStatus.BAD_REQUEST.value());
+		errordetail.setTitle("unable to post video tutorial");
+		errordetail.setDetail(postVideotutorialException.getMessage());
+		errordetail.setDeveloperMessage(postVideotutorialException.getClass().getName());
+		return new ResponseEntity<>(errordetail, null, HttpStatus.BAD_REQUEST);
+	}
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<?> handleValidationError(MethodArgumentNotValidException methodArgumentNotValidException,
 			HttpServletRequest request) {
