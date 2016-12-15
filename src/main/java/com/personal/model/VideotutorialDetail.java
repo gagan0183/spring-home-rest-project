@@ -29,6 +29,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Audited
 @AuditTable(value = "videotutorial_detail_audit_table")
 public class VideotutorialDetail {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "videotutorial_detail_generator")
 	@TableGenerator(name = "videotutorial_detail_generator", pkColumnName = "generator_column", pkColumnValue = "videotutorial_detail_value", allocationSize = 1, initialValue = 0, valueColumnName = "generator_value", table = "homeproject_generator_table")

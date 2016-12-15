@@ -50,7 +50,7 @@ public class Videotutorial {
 	@Column(name = "certificate_print", nullable = false)
 	private boolean certificatePrint;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "videoTutorial")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "videotutorial")
 	private List<VideotutorialDetail> videotutorialDetail;
 	@Basic(optional = true)
 	@Column(name = "revision", nullable = true)
