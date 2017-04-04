@@ -1,4 +1,4 @@
-package com.personal.config;
+package com.personal;
 
 import javax.sql.DataSource;
 

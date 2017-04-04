@@ -62,4 +62,13 @@ public class BookController {
 		List<BookResource> bookResources = bookResourceAssembler.toResources(books);
 		return new ResponseEntity<List<BookResource>>(bookResources, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/book/{isbn}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<SuccessMessage> deleteBook(@PathVariable("isbn") String isbn) {
+		LOGGER.info("in deleteBook");
+		bookService.deleteBook(isbn);
+		SuccessMessage successMessage = new SuccessMessage(HttpStatus.OK.value(),
+				messageSource.getMessage("deletebpost.message", null, null));
+		return new ResponseEntity<SuccessMessage>(successMessage, HttpStatus.OK);
+	}
 }
