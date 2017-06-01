@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.personal.hateoas.resource.VideotutorialResource;
 import com.personal.model.Videotutorial;
-import com.personal.model.VideotutorialDetail;
-import com.personal.rep.VideotutorialDetailRepository;
 import com.personal.rep.VideotutorialRepository;
 
 @Service
@@ -15,9 +13,6 @@ public class VideotutorialServiceImpl implements VideotutorialService {
 
 	@Inject
 	private VideotutorialRepository videotutorialRepository;
-
-	@Inject
-	private VideotutorialDetailRepository videotutorialDetailRepository;
 
 	@Override
 	public VideotutorialResource addvideotutorial(VideotutorialResource videotutorialResource) {
@@ -30,13 +25,6 @@ public class VideotutorialServiceImpl implements VideotutorialService {
 		videotutorial.setCertificatePrint(videotutorialResource.isCertificatePrint());
 		videotutorial.setRevision(videotutorialResource.isRevision());
 		videotutorialRepository.saveAndFlush(videotutorial);
-
-		for (VideotutorialDetail videotutorialDetail1 : videotutorialResource.getvideotutorialDetail()) {
-			VideotutorialDetail videotutorialDetail = new VideotutorialDetail();
-			videotutorialDetail.setTutorialName(videotutorialDetail1.getTutorialName());
-			videotutorialDetail.setvideotutorial(videotutorial);
-			videotutorialDetailRepository.save(videotutorialDetail);
-		}
 
 		return videotutorialResource;
 	}

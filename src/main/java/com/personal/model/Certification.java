@@ -50,8 +50,6 @@ public class Certification {
 	@Column(name = "certificate_print", nullable = false)
 	private boolean certificatePrint;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "certification")
-	private List<CertificationDetail> certificationDetail;
 	@Basic(optional = true)
 	@Column(name = "revision", nullable = true)
 	private boolean revision;
@@ -163,13 +161,5 @@ public class Certification {
 
 	public void setLastModifiedOn(Date lastModifiedOn) {
 		this.lastModifiedOn = lastModifiedOn;
-	}
-
-	public List<CertificationDetail> getCertificationDetail() {
-		return certificationDetail;
-	}
-
-	public void setCertificationDetail(List<CertificationDetail> certificationDetail) {
-		this.certificationDetail = certificationDetail;
 	}
 }

@@ -80,6 +80,18 @@ public class RestExceptionHandler {
 		return new ResponseEntity<>(errordetail, null, HttpStatus.BAD_REQUEST);
 	}
 
+	@ExceptionHandler(VideoNotFoundException.class)
+	public ResponseEntity<?> handleVideonotfoundException(VideoNotFoundException videoNotFoundException,
+			HttpServletRequest request) {
+		Errordetail errordetail = new Errordetail();
+		errordetail.setTimeStamp(new Date().getTime());
+		errordetail.setStatus(HttpStatus.NOT_FOUND.value());
+		errordetail.setTitle("unable to find video");
+		errordetail.setDetail(videoNotFoundException.getMessage());
+		errordetail.setDeveloperMessage(videoNotFoundException.getClass().getName());
+		return new ResponseEntity<>(errordetail, null, HttpStatus.NOT_FOUND);
+	}
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<?> handleValidationError(MethodArgumentNotValidException methodArgumentNotValidException,
 			HttpServletRequest request) {

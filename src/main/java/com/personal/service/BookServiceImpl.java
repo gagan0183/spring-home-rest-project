@@ -24,4 +24,9 @@ public class BookServiceImpl implements BookService {
 		return bokRepository.findByType(type);
 	}
 
+	@Override
+	public void deleteBook(String isbn) {
+		bokRepository.delete(isbn);
+	}
+
 }

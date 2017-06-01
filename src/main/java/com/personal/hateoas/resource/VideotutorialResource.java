@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.stereotype.Component;
 
-import com.personal.model.VideotutorialDetail;
-
 @Component
 public class VideotutorialResource extends ResourceSupport {
 	private String videotutorialName;
@@ -16,7 +14,6 @@ public class VideotutorialResource extends ResourceSupport {
 	private String difficultyLevel;
 	private String videotutorialType;
 	private boolean certificatePrint;
-	private List<VideotutorialDetail> videotutorialDetail;
 	private boolean revision;
 
 	public VideotutorialResource() {
@@ -25,7 +22,7 @@ public class VideotutorialResource extends ResourceSupport {
 
 	public VideotutorialResource(String videotutorialName, Date videotutorialDate, String videotutorialProvider,
 			String difficultyLevel, String videotutorialType, boolean certificatePrint,
-			List<VideotutorialDetail> videotutorialDetail, boolean revision) {
+		    boolean revision) {
 		super();
 		this.videotutorialName = videotutorialName;
 		this.videotutorialDate = videotutorialDate;
@@ -33,7 +30,6 @@ public class VideotutorialResource extends ResourceSupport {
 		this.difficultyLevel = difficultyLevel;
 		this.videotutorialType = videotutorialType;
 		this.certificatePrint = certificatePrint;
-		this.videotutorialDetail = videotutorialDetail;
 		this.revision = revision;
 	}
 
@@ -59,10 +55,6 @@ public class VideotutorialResource extends ResourceSupport {
 
 	public boolean isCertificatePrint() {
 		return certificatePrint;
-	}
-
-	public List<VideotutorialDetail> getvideotutorialDetail() {
-		return videotutorialDetail;
 	}
 
 	public boolean isRevision() {

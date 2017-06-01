@@ -26,6 +26,6 @@ public class CertificationResourceAssembler extends ResourceAssemblerSupport<Cer
 		return new CertificationResource(certification.getCertificationName(), certification.getCertificationDate(),
 				certification.getCertificationProvider(), certification.getDifficultyLevel(),
 				certification.getCertificationType(), certification.isCertificatePrint(),
-				certification.getCertificationDetail(), certification.isRevision());
+				certification.isRevision());
 	}
 }
