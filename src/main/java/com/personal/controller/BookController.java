@@ -1,5 +1,6 @@
 package com.personal.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.personal.exception.PostBookException;
 import com.personal.hateoas.assembler.BookResourceAssembler;
 import com.personal.hateoas.resource.BookResource;
@@ -37,6 +40,18 @@ public class BookController {
 
 	@Autowired
 	private MessageSource messageSource;
+
+	@RequestMapping(value = "/apitest", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String swagg() throws IOException {
+		System.out.println("in apitest");
+		RestTemplate restTemplate = new RestTemplate();
+		String val = restTemplate.getForObject("http://localhost:8080/v2/api-docs", String.class);
+		ObjectMapper mapper = new ObjectMapper();
+		Object json = mapper.readValue(val, Object.class);
+		String p = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+		System.out.println(p);
+		return p;
+	}
 
 	@RequestMapping(value = "/book", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SuccessMessage> addBook(@Valid @RequestBody Book book) {

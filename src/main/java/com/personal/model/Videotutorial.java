@@ -50,8 +50,6 @@ public class Videotutorial {
 	@Column(name = "certificate_print", nullable = false)
 	private boolean certificatePrint;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "videotutorial")
-	private List<VideotutorialDetail> videotutorialDetail;
 	@Basic(optional = true)
 	@Column(name = "revision", nullable = true)
 	private boolean revision;
@@ -163,13 +161,5 @@ public class Videotutorial {
 
 	public void setLastModifiedOn(Date lastModifiedOn) {
 		this.lastModifiedOn = lastModifiedOn;
-	}
-
-	public List<VideotutorialDetail> getvideotutorialDetail() {
-		return videotutorialDetail;
-	}
-
-	public void setvideoTutorialDetail(List<VideotutorialDetail> videotutorialDetail) {
-		this.videotutorialDetail = videotutorialDetail;
 	}
 }

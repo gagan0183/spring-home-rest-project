@@ -26,6 +26,6 @@ public class VideotutorialResourceAssembler extends ResourceAssemblerSupport<Vid
 		return new VideotutorialResource(videotutorial.getvideotutorialName(), videotutorial.getvideotutorialDate(),
 				videotutorial.getvideotutorialProvider(), videotutorial.getDifficultyLevel(),
 				videotutorial.getvideotutorialType(), videotutorial.isCertificatePrint(),
-				videotutorial.getvideotutorialDetail(), videotutorial.isRevision());
+				videotutorial.isRevision());
 	}
 }

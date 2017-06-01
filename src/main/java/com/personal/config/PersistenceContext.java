@@ -39,7 +39,7 @@ public class PersistenceContext {
 		adapter.setGenerateDdl(true);
 
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.hbm2ddl.auto", "create");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		properties.setProperty("org.hibernate.envers.store_data_at_delete", "true");
 

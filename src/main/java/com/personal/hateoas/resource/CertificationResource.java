@@ -1,12 +1,9 @@
 package com.personal.hateoas.resource;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.stereotype.Component;
-
-import com.personal.model.CertificationDetail;
 
 @Component
 public class CertificationResource extends ResourceSupport {
@@ -16,7 +13,6 @@ public class CertificationResource extends ResourceSupport {
 	private String difficultyLevel;
 	private String certificationType;
 	private boolean certificatePrint;
-	private List<CertificationDetail> certificationDetail;
 	private boolean revision;
 
 	public CertificationResource() {
@@ -25,7 +21,7 @@ public class CertificationResource extends ResourceSupport {
 
 	public CertificationResource(String certificationName, Date certificationDate, String certificationProvider,
 			String difficultyLevel, String certificationType, boolean certificatePrint,
-			List<CertificationDetail> certificationDetail, boolean revision) {
+			boolean revision) {
 		super();
 		this.certificationName = certificationName;
 		this.certificationDate = certificationDate;
@@ -33,7 +29,6 @@ public class CertificationResource extends ResourceSupport {
 		this.difficultyLevel = difficultyLevel;
 		this.certificationType = certificationType;
 		this.certificatePrint = certificatePrint;
-		this.certificationDetail = certificationDetail;
 		this.revision = revision;
 	}
 
@@ -59,10 +54,6 @@ public class CertificationResource extends ResourceSupport {
 
 	public boolean isCertificatePrint() {
 		return certificatePrint;
-	}
-
-	public List<CertificationDetail> getCertificationDetail() {
-		return certificationDetail;
 	}
 
 	public boolean isRevision() {
