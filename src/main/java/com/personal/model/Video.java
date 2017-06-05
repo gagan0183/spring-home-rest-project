@@ -32,7 +32,7 @@ public class Video {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "video_generator")
 	@TableGenerator(name = "video_generator", pkColumnName = "generator_column", pkColumnValue = "video_value", allocationSize = 1, initialValue = 1, valueColumnName = "generator_value", table = "homeproject_generator_table")
-	@Column(name = "tutorial_id", insertable = false, nullable = false, unique = true)
+	@Column(name = "video_id", insertable = false, nullable = false, unique = true)
 	private int videoId;
 	@Column(name = "video_name", nullable = false)
 	private String videoName;
@@ -145,5 +145,27 @@ public class Video {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + videoId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Video other = (Video) obj;
+		if (videoId != other.videoId)
+			return false;
+		return true;
 	}
 }

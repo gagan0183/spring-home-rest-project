@@ -47,4 +47,18 @@ public class VideoController {
 		return new ResponseEntity<SuccessMessage>(successMessage, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/video", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<SuccessMessage> updateVideo(@Valid @RequestBody Video video) {
+		LOGGER.info("in updateVideo");
+
+		Video returnVideo = videoService.updateVideo(video);
+		if (returnVideo == null) {
+			throw new PostVideoException(
+					messageSource.getMessage("postvideotutorialupdateexception.message", null, null));
+		}
+		SuccessMessage successMessage = new SuccessMessage(HttpStatus.OK.value(),
+				messageSource.getMessage("successupdatepost.message", null, null));
+		return new ResponseEntity<SuccessMessage>(successMessage, HttpStatus.OK);
+	}
+
 }
