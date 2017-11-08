@@ -1,6 +1,7 @@
 package com.personal.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -14,5 +15,10 @@ public class MyAppConfig extends WebMvcConfigurerAdapter {
 		registry.addRedirectViewController("/documentation/swagger-resources", "/swagger-resources");
 		registry.addRedirectViewController("/documentation", "/documentation/swagger-ui.html");
 		registry.addRedirectViewController("/api/docs", "/swagger-ui.html");
+	}
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("*");
 	}
 }
